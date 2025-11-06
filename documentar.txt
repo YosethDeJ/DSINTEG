@@ -1,0 +1,17 @@
+base de datos
+modulo propietarios
+registra vehiculos y motos
+modulo de pago propietarios administracion
+modulo de verificacion de pagos por torre y numero de apartamento
+modulo de usuarios
+modulo de proveedores
+modulo de pagos a proveedores
+modulo de trabajadores
+modulo de pago trabajadores
+modulo de reportes de caja
+modulo de registro de numeros de llamada para la app
+
+modulo de registro de llamadas por torre y numero de apartamento
+crear app de llamada por internet
+
+que al momento de pagar algo descontar del monto total y esto registrarlo en otro tabla
