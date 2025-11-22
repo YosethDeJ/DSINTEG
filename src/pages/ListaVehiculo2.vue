@@ -135,143 +135,7 @@
 
       <div class="q-pa-md example-row-mix-and-match" v-if="!mostrarMultimedia">
         <div class="row" style="text-align: center">
-          <div class="col-4">
-            <q-card class="my-card">
-              <q-card-section>
-                <q-btn
-                  target="_blank"
-                  glossy
-                  style="background-color: #f76ff7"
-                  >{{ new Date().toLocaleString() }}</q-btn
-                >
-              </q-card-section>
 
-              <q-card-section>
-                <q-field
-                  standout="bg-purple-3 text-white"
-                  label="Numero de documento"
-                  stack-label
-                >
-                  <template v-slot:control>
-                    <div class="self-center full-width no-outline" tabindex="0">
-                      {{ this.numero_documento }}
-                    </div>
-                  </template>
-                </q-field>
-              </q-card-section>
-
-              <q-card-section>
-                <q-field
-                  standout="bg-purple-3 text-white"
-                  label="Placa del vehiculo"
-                  stack-label
-                >
-                  <template v-slot:control>
-                    <div class="self-center full-width no-outline" tabindex="0">
-                      {{ this.placa.toUpperCase() }}
-                    </div>
-                  </template>
-                </q-field>
-              </q-card-section>
-
-              <q-card-section>
-                <q-input
-                  standout="bg-purple-3 text-white"
-                  label="Número de ejes"
-                  stack-label
-                  v-model="numero_ejes"
-                />
-              </q-card-section>
-
-              <!-- Línea -->
-              <q-card-section>
-                <q-input
-                  standout="bg-purple-3 text-white"
-                  label="Línea"
-                  stack-label
-                  v-model="linea"
-                />
-              </q-card-section>
-
-
-
-
-
-
-            </q-card>
-          </div>
-
-          <div class="col-4">
-            <q-card-section>
-              <q-img
-                src="../assets/Cemdiv_logo_2.jpg"
-                style="width: 50%; height: auto; align-items: center"
-              ></q-img>
-            </q-card-section>
-          </div>
-
-          <div class="col-4">
-            <q-card class="my-card">
-              <q-card-section>
-                <q-btn target="_blank" glossy style="background-color: #f76ff7"
-                  >{{ latitud }} - {{ longitud }}</q-btn
-                >
-              </q-card-section>
-              <q-card-section>
-                <q-field
-                  standout="bg-purple-3 text-white"
-                  label="Numero de motor"
-                  stack-label
-                >
-                  <template v-slot:control>
-                    <div class="self-center full-width no-outline" tabindex="0">
-                      {{ this.numero_motor }}
-                    </div>
-                  </template>
-                </q-field>
-              </q-card-section>
-
-              <!-- Tipo de servicio -->
-              <q-card-section>
-                <q-select
-                  standout="bg-purple-3 text-white"
-                  label="Tipo de servicio"
-                  stack-label
-                  v-model="tipo_servicio"
-                  :options="[
-                    'PARTICULAR',
-                    'PÚBLICO',
-                    'OFICIAL',
-                    'ESPECIAL',
-                    'DIPLOMÁTICO'
-                  ]"
-                />
-              </q-card-section>
-
-              <q-card-section>
-                <q-field
-                  standout="bg-purple-3 text-white"
-                  label="Numero de chasis"
-                  stack-label
-                >
-                  <template v-slot:control>
-                    <div class="self-center full-width no-outline" tabindex="0">
-                      {{ this.numero_chasis }}
-                    </div>
-                  </template>
-                </q-field>
-              </q-card-section>
-
-              <q-card-section>
-                <q-input
-                  standout="bg-purple-3 text-white"
-                  label="Siniestro"
-                  stack-label
-                  v-model="siniestro"
-                />
-              </q-card-section>
-            </q-card>
-          </div>
         </div>
       </div>
 
@@ -290,7 +154,7 @@
     
 
           <!-- IMÁGENES posiciones 0,1,2 y 4,5,6,7 -->
-          <div v-if="ruta.ruta.toLowerCase().includes('Foto_motor_desintegrado')">
+          <div v-if="ruta.ruta.toLowerCase().match(/\.(jpg|jpeg|png|gif|webp)$/)">
             <q-img
               :src="'https://soportescemvid.ibingcode.com/' + ruta.ruta"
               :ratio="16 / 9"
@@ -338,128 +202,88 @@
   
 </q-card-section>
 
-        <q-card-section v-if="mostrarMultimedia">
-          <div class="row justify-center q-gutter-md">
-            <q-btn
-              color="purple"
-              glossy
-              icon="arrow_back"
-              label="Atrás"
-              @click="volverAtras"
+        <div class="q-pa-md">
+        <div class="q-col-gutter-md row items-start">
+        <div
+          v-for="ruta in rutas"
+          :key="ruta.ruta"
+          class="col-4"
+        >
+          <!-- IMAGEN -->
+          <div v-if="!ruta.ruta.toLowerCase().endsWith('.mp4')">
+            <q-img
+              :src="'https://soportescemvid.ibingcode.com/' + ruta.ruta"
+              :ratio="16 / 9"
+              style="border: 3px solid purple; border-radius: 10px"
             />
-            <q-btn
-              style="background-color:#e241e2;"
-              icon-right="arrow_forward"
-              label="Siguiente"
-              @click="otraAccionSiLaHay"
+
+            <!-- Nombre del archivo -->
+            <q-item-label style="text-align: center; font-weight: 600">
+              <q-chip dense>
+                <q-avatar
+                  icon="bookmark"
+                  class="glossy"
+                  style="background-color: #f76ff7"
+                  text-color="white"
+                />
+              </q-chip>
+              {{ ruta.ruta.split('/').pop().split('.')[0] }}
+            </q-item-label>
+
+            <!-- CHULITO VERDE -->
+            <div style="text-align: center; margin-top: 4px;">
+              <q-chip
+                color="green-5"
+                text-color="white"
+                icon="check_circle"
+                dense
+                class="glossy"
+              >
+                Archivo verificado
+              </q-chip>
+            </div>
+          </div>
+
+          <!-- VIDEO -->
+          <div v-else>
+            <q-video
+              :src="'https://soportescemvid.ibingcode.com/' + ruta.ruta"
+              :ratio="16 / 9"
+              style="border: 3px solid purple; border-radius: 10px"
             />
-          </div>
-        </q-card-section>
 
+            <!-- Nombre del archivo -->
+            <q-item-label style="text-align: center; font-weight: 600">
+              <q-chip dense>
+                <q-avatar
+                  icon="bookmark"
+                  class="glossy"
+                  style="background-color: #f76ff7"
+                  text-color="white"
+                />
+              </q-chip>
+              {{ ruta.ruta.split('/').pop().split('.')[0] }}
+            </q-item-label>
 
-
-                              <!-- <div class="row">
-                              <div class="col"> -->
-      <q-card-section>
-        <div class="row">
-          <div class="col">
-            <q-btn>
-              <img
-                src="../assets/load_nube.png"
-                @click="toolbar = true;opcion=this.cod_resolucion"
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                SUBIR ARCHIVOS
-              </q-tooltip>
-            </q-btn>
-
-            <q-btn v-show="components_6">
-              <img
-                src="../assets/download.png"
-                @click="f_descarga_soporte()"
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                DESCARGAR ARCHIVOS
-              </q-tooltip>
-            </q-btn>
-
-            <q-btn v-show="components_3">
-              <img
-                src="../assets/descargar_archivo.png"
-                @click="f_generardocumento()"
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                GENERAR ACTA
-              </q-tooltip>
-            </q-btn>
-            <q-btn>
-              <img
-                src="../assets/Reporte_excel.png"
-                @click="f_mensaje_test()"
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                REPORTE EXCEL
-              </q-tooltip>
-            </q-btn>
-          </div>
-          <div class="col">
-            <q-btn v-show="components_4">
-              <img
-                src="../assets/comprobado.png"
-                @click="aprobaregistro()"
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                APROBAR
-              </q-tooltip>
-            </q-btn>
-            <q-btn v-show="components_5">
-              <img
-                src="../assets/rechazar.png"
-                @click="
-                  components_3 = false;
-                  components_4 = false;
-                  components_5 = false;
-                  components_6 = false;
-                "
-                style="width: 50px; height: 50px"
-              />
-              <q-tooltip transition-show="rotate" transition-hide="rotate">
-                RECHAZAR
-              </q-tooltip>
-            </q-btn>
-          </div>
-          <!-- <div class="col">
-
-
-          <q-btn  style="margin-left: 10px;" color="purple" glossy   @click="components_2=false;components_9=true;">MODULO 3</q-btn>
-
-
-
-            <q-btn  style="margin-left: 10px;" color="purple" glossy   @click="components_2=false;components_10=true;components_11=false">MODULO 4</q-btn> 
-
-    
-
-            <q-btn  style="margin-left: 10px;" color="purple" glossy   @click="components_2=false;components_10=false;components_11=true">MODULO 5</q-btn>
-
-           </div> -->
-
-          <div class="col-2">
-            <q-btn
-              style="background-color:#e241e2;"
-              icon-right="arrow_forward"
-              label="Siguiente1"
-              @click="irASiguientePaso"
-            />
+            <!-- CHULITO VERDE -->
+            <div style="text-align: center; margin-top: 4px;">
+              <q-chip
+                color="green-5"
+                text-color="white"
+                icon="check_circle"
+                dense
+                class="glossy"
+              >
+                Archivo verificado
+              </q-chip>
+            </div>
           </div>
         </div>
-      </q-card-section>
-       <!-- </div>
-       </div> -->
+      </div>
+    </div>
+
+
+
     </q-card>
 
     <q-dialog v-model="toolbar">

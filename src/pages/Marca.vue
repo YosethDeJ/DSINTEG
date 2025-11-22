@@ -22,13 +22,14 @@
           as child of QToolbar
         -->
         <q-tabs v-model="tab" shrink stretch>
+
+          <q-tab name="tab6" label="CONTRATOS" @click="components_1=false;components_2=false;components_3=false;components_4=false;components_5=false;components_6=true;" />
           <q-tab name="tab4" label="DESINTEGRADORA " @click="components_1=false;components_2=false;components_3=false;components_4=true;components_5=false;components_6=false;" />
+          <q-tab name="tab5" label="SEDE" @click="components_1=false;components_2=false;components_3=false;components_4=false;components_5=true;components_6=false;" />
           <q-tab name="tab1" label="MARCAS VEHICULOS" @click="components_1=true;components_2=false;components_3=false;components_4=false;components_5=false;components_6=false;" />
           <q-tab name="tab2" label="COLORES VEHICULOS" @click="components_1=false;components_2=true;components_3=false;components_4=false;components_5=false;components_6=false;" />
           <q-tab name="tab3" label="USUARIOS " @click="components_1=false;components_2=false;components_3=true;components_4=false;components_5=false;components_6=false;" />
-          <q-tab name="tab5" label="SEDE" @click="components_1=false;components_2=false;components_3=false;components_4=false;components_5=true;components_6=false;" />
-          <q-tab name="tab6" label="CONTRATOS" @click="components_1=false;components_2=false;components_3=false;components_4=false;components_5=false;components_6=true;" />
-          
+                              
         </q-tabs>
       </q-toolbar>
       <!-- </q-item-section> -->
@@ -221,6 +222,9 @@
                 <q-input standout="bg-purple-3 text-white" label="Representante legal" stack-label v-model="contacto_desintegradora" />
               </q-card-section>
               <q-card-section>
+                <q-input standout="bg-purple-3 text-white" label="NIT" stack-label v-model="nit" />
+              </q-card-section>
+              <q-card-section>
                 <q-input standout="bg-purple-3 text-white" label="email" stack-label v-model="email_desintegradora" />
               </q-card-section>
               <q-card-section>
@@ -372,6 +376,25 @@
                 </div>
               </q-card-section>
 
+
+              <q-card-section>
+                <q-uploader
+                  label="RUT"
+                  style="width: 100%;"
+                  flat
+                  bordered
+                  color="purple"
+                  text-color="white"
+                  no-thumbnails
+                  url="https://cemvid.ibingcode.com/public/subir_documentos_desintegradora"
+                  field-name="rut"
+                  :form-fields="[
+                    { name: 'id_desintegradora', value: id_desintegradora },
+                    { name: 'placa', value: placa }
+                  ]"
+                />                
+              </q-card-section>
+
               
 
 
@@ -406,7 +429,7 @@
 
               <q-checkbox
                 v-model="tieneISO"
-                label="¿Cuenta con SARLAF?"
+                label="SARLAF?"
               />
 
               <q-uploader
@@ -763,15 +786,15 @@
               </q-card-section>
 
               <q-card-section>
-                <q-input standout="bg-purple-3 text-white" label="Entidad Contratante" stack-label v-model="contacto_sede" />
+                <q-input standout="bg-purple-3 text-white" label="Entidad Contratante" stack-label v-model="contratante" />
               </q-card-section>
 
               <q-card-section>
-                <q-input standout="bg-purple-3 text-white" label="Fecha" stack-label v-model="contacto_sede" />
+                <q-input standout="bg-purple-3 text-white" label="Fecha" stack-label v-model="fecha_contrato" />
               </q-card-section>
 
               <q-card-section>
-                <q-input standout="bg-purple-3 text-white" label="Número de vehículos" stack-label v-model="contacto_sede" />
+                <q-input standout="bg-purple-3 text-white" label="Número de vehículos" stack-label v-model="n_vehiculos" />
               </q-card-section>
 
               <q-card-section>

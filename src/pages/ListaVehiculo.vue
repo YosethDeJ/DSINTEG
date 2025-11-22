@@ -1339,6 +1339,8 @@
 </template>
 
 <script>
+
+import logoCemdiv from "../assets/logo_prueba.jpg";
 import axios from "axios";
 import { ref } from "vue";
 import Swal from "sweetalert2";
@@ -1512,20 +1514,36 @@ export default {
   const marginTop  = 15;
   const tableWidth = pageWidth - marginLeft * 2;
 
+   // 🔹 CARGAR Y PINTAR EL LOGO
+  try {
+    const img = new Image();
+    img.src = logoCemdiv; // importado arriba
+
+    await new Promise((resolve) => {
+      img.onload = () => resolve();
+      img.onerror = () => resolve(); // si falla, no rompe todo
+    });
+
+    // x, y, ancho, alto (ajusta a tu gusto)
+    doc.addImage(img, "JPEG", marginLeft, 10, 30, 20);
+  } catch (e) {
+    console.error("Error cargando logo en PDF:", e);
+  }
+
   // =========================
   // ENCABEZADO
   // =========================
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
 
-  doc.text("NOMBRE DE DESINTEGRADORA", pageWidth / 2, marginTop, { align: "center" });
+  doc.text("@NOMBRE_DESINTEGRADORA", pageWidth / 2, marginTop, { align: "center" });
 
   doc.setFontSize(9);
   doc.text("CODIGO UNICO", marginLeft + tableWidth - 50, marginTop + 8);
   doc.text(S(this.cod_resolucion), marginLeft + tableWidth - 20, marginTop + 8);
 
-  doc.text("PLACA DE VEHICULO", marginLeft + tableWidth - 50, marginTop + 16);
-  doc.text(S(this.placa), marginLeft + tableWidth - 20, marginTop + 16);
+  doc.text("PLACA DE VEHICULO", marginLeft + tableWidth - 55, marginTop + 16);
+  doc.text(S(this.placa), marginLeft + tableWidth - 15, marginTop + 16);
 
   // =========================
   // TABLA PRINCIPAL
