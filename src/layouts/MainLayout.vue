@@ -61,7 +61,7 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="car_crash" />
+                  <q-icon name="dashboard" />
                 </q-item-section>
 
                 <q-item-section>
@@ -94,7 +94,7 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="car_crash" />
+                  <q-icon name="car_repair" />
                 </q-item-section>
 
                 <q-item-section>
@@ -111,7 +111,7 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="car_crash" />
+                  <q-icon name="precision_manufacturing" />
                 </q-item-section>
 
                 <q-item-section>
@@ -146,7 +146,7 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="car_crash" />
+                  <q-icon name="garage" />
                 </q-item-section>
 
                 <q-item-section>
