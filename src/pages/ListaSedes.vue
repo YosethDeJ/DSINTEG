@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        LISTADO DE SEDES
+        LISTADO DE SEDE
       </q-card-section>
 
       <q-card-section>
