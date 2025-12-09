@@ -3,7 +3,11 @@
     <div class="q-gutter-y-md"></div>
   </div>
   <div class="q-pa-md q-gutter-sm">
-    <q-card class="my-card text-black" style="width: 100%" v-show="components">
+    <q-card
+  class="my-card text-black gestion-ingresos-card"
+  style="width: 100%"
+  v-show="components"
+>
   <q-item
     clickable
     v-ripple
@@ -17,23 +21,25 @@
 
   <!-- Fila que contiene las 2 secciones lado a lado -->
   <div class="row q-col-gutter-md q-pa-md">
-    <!-- Sección 1: texto + toggle -->
-    
+    <!-- Sección 1: selector tipo búsqueda -->
     <q-card-section
-      class="col-6 col-md-3 "
-      :class="$q.dark.isActive ? 'text-white' : 'text-black'"      
+      class="col-6 col-md-3"
+      :class="$q.dark.isActive ? 'text-white' : 'text-black'"
     >
-
-      <q-toggle
-      
+      <q-btn-toggle
         v-model="value"
-        color="purple"
+        spread
+        no-caps
+        rounded
+        unelevated
+        class="ds-toggle-main"
+        color="grey-3"
         text-color="black"
-        icon="check"
-        
-        :label="value ? 'Búsqueda por Placa' : 'Búsqueda por Fecha'"
-        :left-label="!value"
-        @click="fonctionTest()"
+        :options="[
+          { label: 'Por Fecha', value: false, icon: 'event' },
+          { label: 'Por Placa', value: true, icon: 'directions_car' }
+        ]"
+        @update:model-value="fonctionTest"
       />
     </q-card-section>
 
@@ -41,12 +47,15 @@
     <q-card-section class="col-12 col-md-9">
       <div class="row q-col-gutter-md">
         <div class="q-pa-md col-12 col-sm-3" v-show="components_7">
-          <q-input
-          dense filled
-            standout="bg-purple-3 text-white"
-            v-model="placa"
-            label="PLACA"
-          />
+<q-input
+  dense
+  filled
+  v-model="placa"
+  label="PLACA"
+  class="ds-input-grad"
+  input-class="ds-input-grad-text"
+/>
+
         </div>
 
         <div class="q-pa-md col-12 col-sm-4" v-show="components_8">
@@ -58,12 +67,13 @@
                   transition-show="scale"
                   transition-hide="scale"
                 >
-                  <q-date v-model="date" color="purple">
+                  <!-- Usa primary para aplicar el mismo estilo via CSS -->
+                  <q-date v-model="date" color="primary">
                     <div class="row items-center justify-end">
                       <q-btn
                         v-close-popup
                         label="Close"
-                        color="purple"
+                        color="primary"
                         flat
                       />
                     </div>
@@ -83,12 +93,12 @@
                   transition-show="scale"
                   transition-hide="scale"
                 >
-                  <q-date v-model="date1" color="purple">
+                  <q-date v-model="date1" color="primary">
                     <div class="row items-center justify-end">
                       <q-btn
                         v-close-popup
                         label="Close"
-                        color="purple"
+                        color="primary"
                         flat
                       />
                     </div>
@@ -102,9 +112,9 @@
         <div class="q-pa-md q-gutter-sm">
           <q-btn
             round
-            color="purple"
             glossy
-            icon="search"
+            class="ds-btn-main"
+            icon="travel_explore"
             @click="
               ListaDesintegracion();
               components_1 = true;
@@ -115,6 +125,8 @@
     </q-card-section>
   </div>
 </q-card>
+
+
 
     <!-- <q-card  class="my-card text-black" style="width: 100%" v-show="components">
       <q-item
@@ -3014,7 +3026,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 .my-custom-toggle {
   border: 1px solid #027be3;
 }
@@ -3023,4 +3035,89 @@ export default {
   background-repeat: no-repeat;
   height: 23vh;
 }
+:root {
+  /* ya tienes otras, agregamos esta para el azul del tab activo */
+  --ds-primary-gradient: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+}
+
+/* Tab activo del menú lateral */
+.tab-active {
+  background: var(--ds-primary-gradient);
+  color: #f9fafb !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
+}
+
+.tab-active .q-icon {
+  color: #e0f2fe !important;
+}
+
+/* ========== TOGGLE con estilo de tab-active ========== */
+.ds-toggle-main .q-btn--active {
+  background: var(--ds-primary-gradient) !important;
+  color: #f9fafb !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
+}
+
+.ds-toggle-main .q-btn--active .q-icon {
+  color: #e0f2fe !important;
+}
+
+/* ========== BOTÓN BUSCAR con el mismo estilo ========== */
+.ds-btn-main {
+  background: var(--ds-primary-gradient) !important;
+  color: #f9fafb !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
+}
+
+.ds-btn-main:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.6);
+}
+
+/* ========== CALENDARIOS (q-date) con el mismo azul ========== */
+/* Al usar color="primary", Quasar pone .bg-primary y .text-primary */
+
+.bg-primary {
+  background: var(--ds-primary-gradient) !important;
+  color: #f9fafb !important;
+}
+
+.text-primary {
+  color: #1d4ed8 !important;
+}
+
+/*Opcional: solo aplicar dentro de esta card, si no quieres que afecte todo el sistema*/
+.gestion-ingresos-card .bg-primary {
+  background: var(--ds-primary-gradient) !important;
+  color: #f9fafb !important;
+}
+.gestion-ingresos-card .text-primary {
+  color: #1d4ed8 !important;
+}
+.ds-input-grad .q-field__control {
+  background: var(--ds-primary-gradient) !important;
+  color: #f9fafb !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* texto dentro del input */
+.ds-input-grad-text {
+  color: #f9fafb !important;
+}
+
+/* label flotante */
+.ds-input-grad .q-field__label {
+  color: #e0f2fe !important;
+}
+
+/* iconos o addons si luego le agregas */
+.ds-input-grad .q-field__prepend,
+.ds-input-grad .q-field__append {
+  color: #e0f2fe !important;
+}
+
+
+
 </style>

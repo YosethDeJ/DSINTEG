@@ -1,0 +1,75 @@
+<svg
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <!-- Gradiente azul para el globo -->
+    <linearGradient id="gradGlobeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <!-- Gradiente verde para la hoja -->
+    <linearGradient id="gradLeafGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Globo relleno -->
+  <circle
+    cx="12" cy="11"
+    r="5.5"
+    fill="url(#gradGlobeBlue)"
+  />
+
+  <!-- Líneas del globo, más claras -->
+  <path
+    d="M12 5.5
+       C 10.7 7.2, 10 9, 10 11
+       C 10 13, 10.7 14.8, 12 16.5"
+    fill="none"
+    stroke="#bfdbfe"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+  <path
+    d="M12 5.5
+       C 13.3 7.2, 14 9, 14 11
+       C 14 13, 13.3 14.8, 12 16.5"
+    fill="none"
+    stroke="#bfdbfe"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+  <path
+    d="M7.2 11
+       H16.8"
+    fill="none"
+    stroke="#e0f2fe"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+
+  <!-- Hoja rellena abajo a la derecha -->
+  <path
+    d="
+      M14.5 15.4
+      C 15.6 15, 16.7 15, 17.6 15.5
+      C 18.4 16, 18.9 16.8, 19.1 17.8
+      C 18.1 18.1, 17.1 18.3, 16.3 18.1
+      C 15.4 17.9, 14.8 17.4, 14.3 16.8
+      Z
+    "
+    fill="url(#gradLeafGreen)"
+  />
+
+  <!-- Nervadura clara -->
+  <path
+    d="M16.9 16.1
+       C 16.4 16.7, 16 17.1, 15.4 17.4"
+    fill="none"
+    stroke="#bbf7d0"
+    stroke-width="1"
+    stroke-linecap="round"
+  />
+</svg>

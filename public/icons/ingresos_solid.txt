@@ -1,0 +1,258 @@
+
+<head>
+      ...
+  <style>
+/* Alertas Kairos */
+.k-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: .75rem 1rem;
+  margin: .75rem 0;
+  border-radius: .5rem;
+  border: 1px solid rgba(15, 23, 42, 0.15); /* bordecito suave */
+  font-size: .85rem;
+  line-height: 1.4;
+  background: #f9fafb;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.07);
+}
+
+.k-alert--error {
+  border-left: 4px solid #b91c1c;        /* rojo acento */
+  background: #fef2f2;                   /* fondo error suave */
+  color: #7f1d1d;
+}
+
+.k-alert__icon {
+  margin-top: .1rem;
+  flex-shrink: 0;
+}
+
+.k-alert__content {
+  flex: 1;
+}
+
+.k-alert__title {
+  font-weight: 700;
+  margin-bottom: .25rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  font-size: .78rem;
+}
+
+.k-alert__body {
+  margin-bottom: .35rem;
+}
+
+.k-alert__footer {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+.k-alert__footer-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.k-alert__footer-icon svg {
+  display: block;
+}
+
+
+  </style>
+
+<?php
+$__t0 = microtime(true);
+require_once "init.php";
+$__t1 = microtime(true);
+require_once "Solicitud.php";
+$__t2 = microtime(true);
+ $solicitud = Solicitud::getInstance($db);
+$criterio = 65910850 ?? '';
+$sol=255745??'';
+ // puede venir de un input de búsqueda
+$__t3 = microtime(true);
+$resultados = $solicitud->buscarSolicitudesFiltro(
+    sol: null,
+    nit:  null,
+    nic:  'Pendiente',
+    trafo: null,
+);
+
+$__t4 = microtime(true);
+
+        if (empty($resultados) || isset($resultados["err"])) {
+
+echo '
+<div class="k-alert k-alert--error">
+  <div class="k-alert__icon">
+    <!-- Icono de advertencia -->
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 7v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="12" cy="16.5" r="1" fill="currentColor"/>
+    </svg>
+  </div>
+  <div class="k-alert__content">
+    <div class="k-alert__title">Error al cargar los datos</div>
+    <div class="k-alert__body">
+      '. htmlspecialchars($resultados["err"] ?? "Error desconocido", ENT_QUOTES, "UTF-8") .'
+    </div>
+    <div class="k-alert__footer">
+      <span class="k-alert__footer-icon">
+        <!-- Icono colorido de computador -->
+        <svg width="35" height="35" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <!-- Base del portátil -->
+          <rect x="3" y="16" width="18" height="3" rx="0.8"
+                fill="#e5e7eb"/> <!-- gris claro -->
+          <!-- Línea de sombra bajo la base -->
+          <rect x="4" y="19.2" width="16" height="1.2" rx="0.6"
+                fill="#cbd5f5"/> <!-- azul muy suave -->
+
+          <!-- Cuerpo del portátil -->
+          <rect x="5" y="5" width="14" height="9" rx="1.6"
+                fill="#0f172a" /> <!-- marco oscuro -->
+
+          <!-- Pantalla -->
+          <rect x="6.2" y="6.2" width="11.6" height="6.8" rx="1"
+                fill="#1d4ed8"/> <!-- azul fuerte (Kairos) -->
+
+          <!-- Reflejo en la pantalla -->
+          <path d="M7 7.2 L12 7.2 L7 11.2 Z"
+                fill="#60a5fa" opacity="0.7"/> <!-- azul claro -->
+
+          <!-- Teclado / touchpad -->
+          <rect x="9.5" y="17" width="5" height="1"
+                rx="0.5" fill="#9ca3af"/> <!-- gris medio -->
+
+          <!-- Luz de encendido -->
+          <circle cx="12" cy="15.5" r="0.6" fill="#22c55e"/> <!-- verde encendido -->
+        
+          </svg>
+        
+      </span>
+      <span>INFORMAR AL ÁREA DE DESARROLLO E INNOVACIÓN</span>
+    </div>
+  </div>
+</div>';
+
+    $__t5 = microtime(true);
+
+    error_log(sprintf(
+        "TIMING Kairos: init=%.4f, clase=%.4f, instancia=%.4f, buscar=%.4f, html=%.4f, total=%.4f",
+        $__t1 - $__t0,   // init.php
+        $__t2 - $__t1,   // require Solicitud.php
+        $__t3 - $__t2,   // getInstance()
+        $__t4 - $__t3,   // buscarSolicitudesFiltro()
+        $__t5 - $__t4,   // render de la alerta
+        $__t5 - $__t0  
+        ));  // total del script
+            exit;
+            
+        }else{
+?>
+<div class="table-wrap" style="overflow:auto; border:1px solid #e8eef2; border-radius:12px">
+    <table class="table" aria-describedby="resumen">
+
+          <thead>
+        <tr>
+          <th>N° radicado</th>
+          <th>Codigo del transformador</th>
+          <th>Nombre del proyecto</th>
+          <th>Tipo de generación</th>
+          <th>Cap. instalada (kW)</th>
+
+          <th>Estado</th>
+          <th>Etapa</th>
+          <th>Gestion</th>
+          <th>Dias</th>
+
+        </tr>
+      </thead>
+
+      <tbody id="tblBody">
+
+
+
+       
+<?php if (isset($resultados['alert'])): ?>
+
+  <tr>
+    <td colspan="8" style="padding:16px; color:#6b7a8c">
+            <?= htmlspecialchars($resultados['alert'], ENT_QUOTES, 'UTF-8') ?>
+    </td>
+  </tr>
+
+<?php elseif (!empty($resultados)): ?>
+
+  <?php foreach ($resultados as $s): ?>
+    <tr data-estado="<?= htmlspecialchars($s['ESTADO'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+      <td data-label="N° radicado">
+        <?= htmlspecialchars($s['SOL'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+         <td data-label="codigo del transformador">
+        <?= htmlspecialchars($s['CODIGO_TRANSFORMADOR'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+
+      <td data-label="Nombre del proyecto">
+        <?= htmlspecialchars($s['PROYECTO'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+
+      <td data-label="Tipo de generación">
+        <?= htmlspecialchars($s['TIPO_GENERACION'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+
+      <td data-label="Cap. instalada (kW)">
+        <?= number_format((float)($s['CAPACIDAD_INSTALADA_KW'] ?? 0), 0, ',', '.') ?>
+      </td>
+
+      <td data-label="Estado">
+        <?= $s['ESTADO_DETALLE'] ?? '' ?>
+      </td>
+
+      <td data-label="Etapa">
+        <?= $s['ETAPA_DETALLE'] ?? '' ?>
+      </td>
+
+      <td data-label="Usuario gestión">
+        <?= htmlspecialchars($s['NOMBRE'] ?? 'Por asignar', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+
+      <td data-label="Días">
+        <?= htmlspecialchars($s['DIAS_PARAM'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+
+<?php endif; ?>
+
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+<?php
+        }
+        $__t5 = microtime(true);
+   
+error_log(sprintf(
+    "TIMING Kairos: init=%.4f, clase=%.4f, instancia=%.4f, buscar=%.4f, html=%.4f, total=%.4f",
+    $__t1 - $__t0,   // init.php
+    $__t2 - $__t1,   // require Solicitud.php
+    $__t3 - $__t2,   // getInstance()
+    $__t4 - $__t3,   // buscarSolicitudesFiltro()
+    $__t5 - $__t4,   // render tabla HTML
+    $__t5 - $__t0    // total
+));
+?>
+
+

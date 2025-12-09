@@ -1,0 +1,26 @@
+<svg
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Carro (relleno degradado simple usando 2 tonos) -->
+  <defs>
+    <linearGradient id="gradCarIngresos" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="3" y="9" width="11" height="5" rx="1.5" ry="1.5"
+        fill="url(#gradCarIngresos)"/>
+  <rect x="5" y="7" width="7" height="3" rx="1" ry="1"
+        fill="url(#gradCarIngresos)"/>
+
+  <!-- Llantas -->
+  <circle cx="7" cy="16" r="1.6" fill="#0f172a"/>
+  <circle cx="13" cy="16" r="1.6" fill="#0f172a"/>
+
+  <!-- Fragmentos -->
+  <rect x="16.2" y="9" width="1.4" height="1.4" fill="#93c5fd"/>
+  <rect x="18.2" y="10.2" width="1.4" height="1.4" fill="#bfdbfe"/>
+  <rect x="17.4" y="12" width="1.4" height="1.4" fill="#60a5fa"/>
+</svg>

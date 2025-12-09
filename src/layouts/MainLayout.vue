@@ -1,63 +1,78 @@
 <template>
-  <q-layout view="lHh LpR lFf">
+
+    <q-layout view="hHh LpR lFf">
+
     <q-header
       reveal
       :class="$q.dark.isActive ? 'header_dark' : 'header_normal'"
     >
-      <q-toolbar class="text-white rounded-borders "
-       style="background-color:white;
-  color: rgb(137, 60, 137);">
+      <q-toolbar class="header-toolbar text-white rounded-borders">
+
+                  <div class="q-ml-sm header-user-name">
+            <spam>DSINTEG</spam>
+          </div>
+
+
+        <q-space />
+
+        <!-- Usuario + nombre (derecha) -->
+        <div class="row items-center no-wrap header-user q-mr-sm">
+          <q-avatar size="32px">
+            <img
+              src="https://cdn.quasar.dev/img/boy-avatar.png"
+              alt="Usuario"
+            />
+          </q-avatar>
+          <div class="q-ml-sm header-user-name">
+            {{ username.toUpperCase() }}
+          </div>
+        </div>
+
+        <!-- Botón logout (derecha) -->
         <q-btn
-          @click="left = !left"
-          color="purple"
-          
-          dense
-          icon="menu"
-          class="q-mr-sm"
-        />
-        <q-btn
-          color="purple"
+          color="white"
+          text-color="black"
           dense
           icon="logout"
-          label="Salir / Cerrar Sesión"
+          
           @click="logoutNotify"
           to="/"
           class="q-ml-sm"
           unelevated
         />
-
-       
       </q-toolbar>
     </q-header>
+
     <q-drawer
-      class="left-navigation "
+      class="left-navigation"
       show-if-above
-      v-model="left"      
+      v-model="left"
       side="left"
       elevated
     >
       <div
-        class="full-height" style="color:rgb(99, 99, 91)"
-        :class="$q.dark.isActive ? 'bg-grey-9 text-white' : 'bg-grey-2'"
-        
-        
+        class="full-height drawer-shell"
+        :class="$q.dark.isActive ? 'drawer_dark' : 'drawer_normal'"
       >
-        <div style="height: calc(100% - 117px);padding:10px;">
-          <q-toolbar style="height: -11px;">
-            <q-avatar >
-              <img style="border: 3px solid purple;" src="https://cdn.quasar.dev/img/boy-avatar.png" />
-            </q-avatar>
+        <div style="height: calc(100% - 117px); padding: 10px;">
 
-            <q-toolbar-title>{{username.toUpperCase()}}</q-toolbar-title>
+                  
 
-             
-          </q-toolbar>
+          <!-- Menú lateral -->
           
-          <q-scroll-area style="height:100%;">
-            <q-list padding>
-              
+                                    <!-- Logo corporativo ocupando el ancho superior del drawer -->
+                  <div class="drawer-logo-box">
+                    <q-img
+                      src="~assets/carro_desinteg.png" 
+                      alt="Logo DSINTEG"
+                      class="drawer-logo-img"
+                                          />
+                  </div>
+          <q-scroll-area style="height: 100%;">
 
-              
+            
+
+            <q-list padding>
 
 
               <q-item
@@ -67,15 +82,21 @@
                 clickable
                 v-ripple
               >
-                <q-item-section avatar>
-                  <q-icon name="car_repair" />
-                </q-item-section>
+  <q-item-section avatar>
+       <q-icon
+      :name="
+        $route.path === '/listado'
+          ? 'img:icons/icon_ingresos_solid.svg'
+          : 'img:icons/icon_ingresos_outline.svg'
+      "
+      size="35px"
+    />
+  </q-item-section>
 
                 <q-item-section>
                   Gestion De Ingresos
                 </q-item-section>
               </q-item>
-
 
               <q-item
                 active-class="tab-active"
@@ -85,7 +106,14 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="precision_manufacturing" />
+                      <q-icon
+      :name="
+        $route.path === '/listado2'
+          ? 'img:icons/icon_desinteg_solid.svg'
+          : 'img:icons/icon_desinteg_outline.svg'
+      "
+      size="35px"
+    />
                 </q-item-section>
 
                 <q-item-section>
@@ -101,7 +129,14 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="save" />
+                      <q-icon
+      :name="
+        $route.path === '/gestion-ambiental'
+          ? 'img:icons/icon_ambiental_globe_solid.svg'
+          : 'img:icons/icon_ambiental_globe_outline.svg'
+      "
+      size="35px"
+    />
                 </q-item-section>
 
                 <q-item-section>
@@ -110,8 +145,8 @@
               </q-item>
 
               <q-item
-              active-class="tab-active"
-               to="/dashboard"
+                active-class="tab-active"
+                to="/dashboard"
                 class="q-ma-sm navigation-item"
                 clickable
                 v-ripple
@@ -126,8 +161,8 @@
               </q-item>
 
               <q-item
-              active-class="tab-active"
-               to="/marca"
+                active-class="tab-active"
+                to="/marca"
                 class="q-ma-sm navigation-item"
                 clickable
                 v-ripple
@@ -139,11 +174,11 @@
                 <q-item-section>
                   Administracion
                 </q-item-section>
-              </q-item> 
+              </q-item>
 
               <q-item
-              active-class="tab-active"
-               to="/Gestion_operativa"
+                active-class="tab-active"
+                to="/Gestion_operativa"
                 class="q-ma-sm navigation-item"
                 clickable
                 v-ripple
@@ -155,7 +190,7 @@
                 <q-item-section>
                   Gestion Operativa
                 </q-item-section>
-              </q-item>                  
+              </q-item>
 
             </q-list>
           </q-scroll-area>
@@ -173,7 +208,6 @@
           </div>
         </div>
       </q-page>
-     
     </q-page-container>
   </q-layout>
 </template>
@@ -182,80 +216,153 @@
 import Swal from 'sweetalert2'
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
+
 export default {
-  data() {
+  data () {
     return {
       left: false,
-      username:''
-    };
+      username: ''
+    }
   },
-  created(){
-      this.username=localStorage.getItem('nombre');
-      // this.username='yordis';
-    },
+  created () {
+    this.username = localStorage.getItem('nombre') || ''
+  },
   methods: {
-    logoutNotify() {
-      localStorage.removeItem("nombre");
-      localStorage.removeItem("token");
+    logoutNotify () {
+      localStorage.removeItem('nombre')
+      localStorage.removeItem('token')
       this.$q.notify({
-        message: "Logged out"
-      });
+        message: 'Sesión cerrada correctamente',
+        color: 'positive',
+        icon: 'logout'
+      })
     },
-    f_mensaje_test(){
-
-Swal.fire("Modulo en Desarrollo!");
-} 
+    f_mensaje_test () {
+      Swal.fire('Módulo en desarrollo')
+    }
   }
-};
+}
 </script>
 
 <style>
-.q-drawer {
-  /*background-image: url(https://demos.creative-tim.com/vue-material-dashboard/img/sidebar-2.32103624.jpg) !important;*/
-  /* background-image: url("/statics/images/lake.jpg") !important; */
-  background-size: cover !important;
-  background-color: #d1d4d5;
-  
-}
-
-.drawer_normal {
-  background-color: rgba(216, 211, 211, 0.587);
-  
-}
-
-.drawer_dark {
-  background-color: #d1d4d5;
-
-}
-
-.navigation-item {
-  border-radius: 5px;
-  color: black;
-}
-
-.tab-active {
-  background-color:white;
-  color: rgb(137, 60, 137);
-  border: 2px solid rgb(137, 60, 137);
+:root {
+  --ds-gray-dark: #111827;   /* similar a bg-gray-900 */
+  --ds-gray-mid: #4b5563;    /* gray-700 */
+  --ds-gray-soft: #f9fafb;   /* fondo de la card del login */
+  --ds-gray-border: #9ca3af; /* gray-400 */
 }
 
 body {
-  background: #f1f1f1 !important;
+  background: #e5e7eb !important; /* mismo fondo del login */
 }
 
+/* HEADER */
 .header_normal {
   background: linear-gradient(
-    145deg,
-    rgb(242, 241, 244) 15%,
-    rgb(244, 238, 244) 70%
+    135deg,
+    var(--ds-gray-dark) 0%,
+    var(--ds-gray-mid) 60%,
+    #6b7280 100%
   );
 }
 
 .header_dark {
-  background: linear-gradient(145deg, rgba(227, 234, 233, 0.851) 15%, rgb(233, 234, 236) 70%);
-}
-.q-mr-sm{
-color:rgb(137,60,137);
+  background: linear-gradient(
+    135deg,
+    #020617 0%,
+    #111827 50%,
+    #1f2937 100%
+  );
 }
 
+.header-toolbar {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Usuario en el header */
+.header-user-name {
+  color: #f9fafb;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  max-width: 180px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* DRAWER */
+.q-drawer {
+  background: transparent;
+}
+
+.left-navigation {
+  background: transparent;
+}
+
+.drawer-shell {
+  color: var(--ds-gray-dark);
+}
+
+.drawer_normal {
+  background: var(--ds-gray-soft);
+  color: var(--ds-gray-dark);
+}
+
+.drawer_dark {
+  background: #111827;
+  color: #f9fafb;
+}
+
+/* Logo corporativo en el drawer ocupando ancho */
+.drawer-logo-box {
+  width: 100%;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+ 
+}
+
+.drawer-logo-img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* ITEMS DEL MENÚ LATERAL */
+.navigation-item {
+  border-radius: 8px;
+  color: inherit;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.navigation-item:hover {
+  background-color: rgba(156, 163, 175, 0.16); /* gris suave */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.tab-active {
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%); /* azul intenso */
+  color: #f9fafb !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.45);
+}
+
+/* Icono también en azul claro */
+.tab-active .q-icon {
+  color: #e0f2fe !important;
+}
+
+/* Opcional: al pasar el mouse, un poco más de brillo */
+.navigation-item.tab-active:hover {
+  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.6);
+  transform: translateY(-1px);
+}
+
+
+/* Botón del menú (ajuste fino) */
+.q-mr-sm {
+  color: var(--ds-gray-dark);
+}
 </style>
