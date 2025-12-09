@@ -152,7 +152,14 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="bar_chart" />
+                      <q-icon
+      :name="
+        $route.path === '/dashboard'
+          ? 'img:icons/icon_reportes_solid.svg'
+          : 'img:icons/icon_reportes_outline.svg'
+      "
+      size="32px"
+    />
                 </q-item-section>
 
                 <q-item-section>
@@ -168,7 +175,14 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="admin_panel_settings" />
+                     <q-icon
+      :name="
+        $route.path === '/marca'
+          ? 'img:icons/icon_admin_solid.svg'
+          : 'img:icons/icon_admin_outline.svg'
+      "
+      size="32px"
+    />
                 </q-item-section>
 
                 <q-item-section>
@@ -184,7 +198,14 @@
                 v-ripple
               >
                 <q-item-section avatar>
-                  <q-icon name="settings" />
+                      <q-icon
+      :name="
+        $route.path === '/Gestion_operativa'
+          ? 'img:icons/icon_gestion_solid.svg'
+          : 'img:icons/icon_gestion_outline.svg'
+      "
+      size="32px"
+    />
                 </q-item-section>
 
                 <q-item-section>

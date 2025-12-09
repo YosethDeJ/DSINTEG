@@ -1,0 +1,48 @@
+<svg
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="gradGearGestion" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Engranaje relleno -->
+  <circle
+    cx="9" cy="12"
+    r="2.3"
+    fill="url(#gradGearGestion)"
+  />
+
+  <!-- Dientes del engranaje -->
+  <rect x="8.2" y="7.5" width="1.6" height="1.3" fill="#1d4ed8"/>
+  <rect x="8.2" y="15.2" width="1.6" height="1.3" fill="#1d4ed8"/>
+  <rect x="5.7" y="11.2" width="1.3" height="1.6" fill="#1d4ed8"/>
+  <rect x="11.9" y="11.2" width="1.3" height="1.6" fill="#1d4ed8"/>
+
+  <!-- Centro claro del engranaje -->
+  <circle
+    cx="9" cy="12"
+    r="1"
+    fill="#e0f2fe"
+  />
+
+  <!-- Flecha de flujo sólida -->
+  <path
+    d="M13.5 10.5 H17
+       C18 10.5 18.7 11.2 18.7 12.2
+       C18.7 13.2 18 13.9 17 13.9
+       H15.8"
+    fill="none"
+    stroke="#e0f2fe"
+    stroke-width="1.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M15.8 9.8 L17.8 10.5 L17.1 12.5 Z"
+    fill="#e0f2fe"
+  />
+</svg>

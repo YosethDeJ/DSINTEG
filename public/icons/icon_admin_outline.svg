@@ -1,0 +1,71 @@
+<svg
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Panel / tarjeta -->
+  <rect
+    x="6" y="4.5"
+    width="12" height="15"
+    rx="1.8" ry="1.8"
+    fill="none"
+    stroke="#1d4ed8"
+    stroke-width="1.4"
+  />
+
+  <!-- Línea superior (título del panel) -->
+  <line
+    x1="6" y1="8"
+    x2="18" y2="8"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+    stroke-linecap="round"
+  />
+
+  <!-- Slider 1 -->
+  <line
+    x1="9" y1="10"
+    x2="9" y2="16"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+    stroke-linecap="round"
+  />
+  <circle
+    cx="9" cy="12"
+    r="0.9"
+    fill="none"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+  />
+
+  <!-- Slider 2 -->
+  <line
+    x1="12" y1="10"
+    x2="12" y2="16"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+    stroke-linecap="round"
+  />
+  <circle
+    cx="12" cy="14"
+    r="0.9"
+    fill="none"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+  />
+
+  <!-- Slider 3 -->
+  <line
+    x1="15" y1="10"
+    x2="15" y2="16"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+    stroke-linecap="round"
+  />
+  <circle
+    cx="15" cy="11.5"
+    r="0.9"
+    fill="none"
+    stroke="#1d4ed8"
+    stroke-width="1.1"
+  />
+</svg>
