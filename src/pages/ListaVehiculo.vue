@@ -236,7 +236,9 @@
     <q-card style="width: 100%" v-show="components_1">
       <div class="q-pa-md">
         <q-table
+        
         v-if="vehiculo.length"
+        class="my-sticky-header-table"
           :class="$q.dark.isActive ? 'bg-grey-9 text-white' : 'bg-grey-2'"
           :rows="vehiculo"
           :columns="headers_vehiculo"
@@ -3117,7 +3119,34 @@ export default {
 .ds-input-grad .q-field__append {
   color: #e0f2fe !important;
 }
+</style>
+<style lang="sass">
+.my-sticky-header-table
+  /* height or max-height is important */
+  height: 310px
 
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th
+    
+    
+  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%) 
+  color: #f9fafb
+  border-radius: 8px
 
+  thead tr th
+    position: sticky
+    z-index: 1
+  thead tr:first-child th
+    top: 0
 
+  /* this is when the loading indicator appears */
+  &.q-table--loading thead tr:last-child th
+    /* height of all previous header rows */
+    top: 48px
+
+  /* prevent scrolling behind sticky top row on focus */
+  tbody
+    /* height of all previous header rows */
+    scroll-margin-top: 48px
 </style>
